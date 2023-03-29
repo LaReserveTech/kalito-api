@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  wata-database:
+    container_name: wata-database-development
+    image: postgres:latest
+    tty: true
+    environment:
+      - POSTGRES_USER=developer
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=wata-database-development
+    ports:
+      - "5432:5432"
