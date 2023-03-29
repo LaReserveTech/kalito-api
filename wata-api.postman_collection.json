@@ -1,0 +1,36 @@
+{
+	"info": {
+		"_postman_id": "f7f5311f-cab7-4235-a947-305566aa9139",
+		"name": "Wata-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "6761973"
+	},
+	"item": [
+		{
+			"name": "/users",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Thomas Duteuil\",\n    \"phone\": \"+33 7 56 98 54 24\",\n    \"address\": \"12 rue Saint-Léon, 54000 Nancy\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/user",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
