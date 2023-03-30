@@ -1,10 +1,25 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
+import { parsePhoneNumber } from 'libphonenumber-js';
 import { PrismaService } from '../prisma.service';
 
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
+
+  formatPhone(phone: string) {
+    try {
+      const { number } = parsePhoneNumber(phone);
+      return number;
+    } catch {}
+
+    try {
+      const { number } = parsePhoneNumber(phone, 'FR');
+      return number;
+    } catch {
+      throw new HttpException('Invalid phone number', HttpStatus.BAD_REQUEST);
+    }
+  }
 
   async user(
     userWhereUniqueInput: Prisma.UserWhereUniqueInput,

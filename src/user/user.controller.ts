@@ -8,11 +8,14 @@ export class UserController {
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUser(createUserDto);
+    const phone = this.userService.formatPhone(createUserDto.phone);
+    return this.userService.createUser({ ...createUserDto, phone });
   }
 
   @Delete(':phone')
-  remove(@Param('phone') phone: string) {
+  remove(@Param('phone') rawPhone: string) {
+    const phone = this.userService.formatPhone(rawPhone);
+
     return this.userService.deleteUserByPhone(phone);
   }
 }
