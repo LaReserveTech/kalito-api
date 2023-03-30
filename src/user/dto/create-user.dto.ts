@@ -14,4 +14,9 @@ export class CreateUserDto {
   @IsNotEmpty()
   @MinLength(3)
   address: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(3)
+  commune: string;
 }

@@ -1,5 +1,5 @@
 {
-  "name": "wata-api",
+  "name": "kalito-api",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -28,9 +28,14 @@
     "@prisma/client": "^4.12.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "csv-parse": "^5.3.6",
+    "dayjs": "^1.11.7",
     "libphonenumber-js": "^1.10.24",
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.3.1",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.2.0"
+    "rxjs": "^7.2.0",
+    "trust-env": "^2.2.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",

@@ -1,13 +1,13 @@
 version: "3.9"
 
 services:
-  wata-database:
-    container_name: wata-database-development
+  kalito-database:
+    container_name: kalito-database-development
     image: postgres:latest
     tty: true
     environment:
       - POSTGRES_USER=developer
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=wata-database-development
+      - POSTGRES_DB=kalito-database-development
     ports:
       - "5432:5432"

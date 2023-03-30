@@ -11,8 +11,61 @@ datasource db {
 }
 
 model User {
-  id    Int     @default(autoincrement()) @id
-  phone String
-  name  String
-  address String
+  id        Int     @id @default(autoincrement())
+  phone     String
+  name      String
+  address   String
+  commune   Commune @relation(fields: [communeId], references: [id], onDelete: Cascade)
+  communeId Int
+
+  messages Message[]
+}
+
+model Commune {
+  id           Int     @id @default(autoincrement())
+  inseecommune String
+  nomcommune   String
+  quartier     String
+  reseau       Reseau? @relation(fields: [reseauId], references: [id], onDelete: Cascade)
+  reseauId     Int?
+  nomreseau    String
+  debutalim    String
+  
+  User         User[]
+}
+
+model Reseau {
+  id       Int    @id @default(autoincrement())
+  cdreseau String
+
+  commune     Commune[]
+  prelevement Prelevement[]
+}
+
+model Prelevement {
+  id                         Int      @id @default(autoincrement())
+  reseau                     Reseau?  @relation(fields: [reseauId], references: [id])
+  reseauId                   Int?
+  cddept                     String
+  inseecommuneprinc          String
+  nomcommuneprinc            String
+  cdreseauamont              String
+  nomreseauamont             String
+  pourcentdebit              String
+  referenceprel              String
+  dateprel                   DateTime
+  conclusionprel             String
+  ugelib                     String
+  distrlib                   String
+  moalib                     String
+  plvconformitebacterio      String
+  plvconformitechimique      String
+  plvconformitereferencebact String
+  plvconformitereferencechim String
+}
+
+model Message {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
 }
