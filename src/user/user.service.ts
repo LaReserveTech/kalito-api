@@ -35,14 +35,16 @@ export class UserService {
     cursor?: Prisma.UserWhereUniqueInput;
     where?: Prisma.UserWhereInput;
     orderBy?: Prisma.UserOrderByWithRelationInput;
+    distinct?: Prisma.Enumerable<Prisma.UserScalarFieldEnum>;
   }): Promise<User[]> {
-    const { skip, take, cursor, where, orderBy } = params;
+    const { skip, take, cursor, where, orderBy, distinct } = params;
     return this.prisma.user.findMany({
       skip,
       take,
       cursor,
       where,
       orderBy,
+      distinct,
     });
   }
 
