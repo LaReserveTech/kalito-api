@@ -1,25 +1,27 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '@prisma/client';
+import { State, User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { messages } from './message.constants';
 
 @Injectable()
 export class MessageService {
   constructor(private prisma: PrismaService) {}
 
-  async sendMessage(user: User) {
+  async sendMessage(user: User, state: State) {
     /**
      * SMS Provider part
      */
-    console.log(
-      `Sending message to ${user.phone}: D'après nos relevés, il n'est pas recommandé de donner l'eau du robinet aux enfants en bas âge et femmes enceinte.`,
-    );
+    console.log(user.id, messages[state]);
 
-    // await this.prisma.message.create({
-    //   data: {
-    //     state: report.state,
-    //     reportId: report.id,
-    //     userId: user.id,
-    //   },
-    // });
+    await this.prisma.message.create({
+      data: {
+        user: {
+          connect: {
+            id: user.id,
+          },
+        },
+        state: state,
+      },
+    });
   }
 }

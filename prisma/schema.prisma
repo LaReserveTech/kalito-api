@@ -30,8 +30,9 @@ model Commune {
   reseauId     Int?
   nomreseau    String
   debutalim    String
-  
-  User         User[]
+
+  User   User[]
+  Report Report[]
 }
 
 model Reseau {
@@ -62,10 +63,27 @@ model Prelevement {
   plvconformitechimique      String
   plvconformitereferencebact String
   plvconformitereferencechim String
+  Report                     Report[]
 }
 
 model Message {
-  id     Int  @id @default(autoincrement())
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     Int   @id @default(autoincrement())
+  user   User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
+  state  State @default(good)
+}
+
+enum State {
+  good
+  bad
+}
+
+model Report {
+  id            Int         @id @default(autoincrement())
+  prelevement   Prelevement @relation(fields: [prelevementId], references: [id], onDelete: Cascade)
+  prelevementId Int
+  commune       Commune     @relation(fields: [communeId], references: [id], onDelete: Cascade)
+  communeId     Int
+  state         State       @default(good)
+  isSent        Boolean     @default(false)
 }
